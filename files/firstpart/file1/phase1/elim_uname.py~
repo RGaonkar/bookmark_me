@@ -1,0 +1,7 @@
+f = open("rawtoken.csv") #all the raw text minus the capitalized 
+
+raw = f.read() 
+
+
+
+

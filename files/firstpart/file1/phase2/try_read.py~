@@ -1,0 +1,15 @@
+import nltk
+
+f = open("/media/34227B6E227B3448/projectBooKmarks/mid_sem/phase1/rawtoken.csv")
+
+raw = f.read()
+
+#print (title)
+
+t = type(raw)
+
+print(t)
+
+#print(raw)
+
+rtoken = nltk.word_tokenize(raw)

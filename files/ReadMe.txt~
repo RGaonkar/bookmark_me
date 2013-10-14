@@ -1,0 +1,70 @@
+phase1:
+
+	extraction of all the raw data in file:
+	
+	/raw/raw.txt
+	
+	tokenized form :
+	
+	/raw/rawtoken.csv
+	
+	extraction of the title tag :
+	
+	/title/titletoken.csv
+	
+	
+	extraction of the <h1> - <h6> tags :
+	
+	/heading/heading1.csv
+	/heading/heading2.csv
+	/heading/heading3.csv
+	/heading/heading4.csv
+	/heading/heading5.csv
+	/heading/heading6.csv
+	
+	extraction of urls:
+	
+	/url/link.csv
+	
+	extraction of url names:
+	
+	/url/urlnames.txt
+	
+
+phase2:
+
+	text processing of the title tag
+	
+	
+	
+	elimination of the words in title tag from the raw text = raw1
+	
+	
+	
+phase3:
+
+	text processing of all the headings 
+	
+	
+
+	elimination of the words in heading tags from raw1 = raw2
+	
+	
+	
+phase3:
+
+	text processing of all the urlnames 
+	
+	
+
+	elimination of the words in urlnames from raw2 = raw3
+		
+		
+phase3:
+
+	text processing of all the url links 
+	
+	
+
+		
+		

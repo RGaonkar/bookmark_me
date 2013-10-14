@@ -1,0 +1,590 @@
+#extraction of the raw text, title tag, heading tag, urls, url names
+
+from BeautifulSoup import BeautifulSoup
+
+from nltk.tokenize import *
+
+import nltk
+
+import re
+
+from urllib import urlopen
+
+import csv 
+
+from nltk.corpus import stopwords
+
+
+url = "http://hbr.org/2013/04/now-is-our-time/ar/1" 
+#keeping this along with other urls
+
+
+proxies = {'http': 'http://f2010193:bp1708@10.1.9.23:8080'} 
+
+raw = urlopen(url, proxies=proxies).read()
+
+cleanraw = nltk.clean_html(raw)
+
+
+#Split words by all non-alpha characters
+words=re.compile(r'[^A-Z^a-z]+').split(cleanraw)
+#words is a list
+
+
+#raw.txt contains the raw text
+f = open('raw.txt', 'w')      #not really used anywhere   
+f.write(cleanraw) 
+f.close()
+
+
+#tokenize cleanraw
+#tok_clean = nltk.word_tokenize(cleanraw)
+
+
+#removing all the smartquotes
+
+clean = []
+
+for x in words:
+    if "quo" not in x:
+        clean.append(x) 
+
+#storing this in a file
+
+f = open('rawtoken.csv', 'w')    #this file will be used for computing document frequencies
+
+f.write("\n".join(clean)) 
+f.close()
+
+
+
+#extract the title element
+
+soup = BeautifulSoup(raw)
+
+titlestr = soup.title.string
+
+#print(titlestr)
+
+
+#Split words by all non-alpha characters
+words_title = re.compile(r'[^A-Z^a-z]+').split(titlestr)
+#words_title is a list
+
+#eliminating smart quotes from the title tag
+
+clean_title = []
+
+for x in words_title:
+    if "quo" not in x:
+        clean_title.append(x) 
+
+
+#print(title_tokens)
+
+f = open('titletoken.csv', 'w')
+f.write("\n".join(clean_title)) 
+f.close()
+
+#extracting the heading element
+
+value1 = [] #empty list to store the values of h1
+value2 = [] #empty list to store the values of h2
+value3 = [] #empty list to store the values of h3
+value4 = [] #empty list to store the values of h4
+value5 = [] #empty list to store the values of h5
+value6 = [] #empty list to store the values of h6
+
+
+#for h1
+
+hd1 = soup.findAll('h1')
+
+for item in hd1:
+ 	hname1 = item.contents[0]
+ #	print(hname1)
+ 	entry = "%s" % (hname1)
+ 	value1.append(entry)
+
+#value1 is a list
+
+h1_str = ' '.join(value1)
+
+#h1_str is a string
+
+#Split words by all non-alpha characters
+words_h1 = re.compile(r'[^A-Z^a-z]+').split(h1_str)
+#words_raw is a list
+
+
+#eliminating smart quotes from words_h1
+
+clean_h1 = []
+
+for x in words_h1:
+    if "quo" not in x:
+        clean_h1.append(x) 
+
+f = open("heading1.csv", "w")
+f.write("\n".join(clean_h1))
+f.close()
+ 
+ 
+#for h2
+
+hd2 = soup.findAll('h2')
+
+for item in hd2:
+ 	hname2 = item.contents[0]
+ #	print(hname2)
+ 	entry = "%s" % (hname2)
+ 	value2.append(entry)
+
+#value2 is a list
+
+h2_str = ' '.join(value2)
+
+#h2_str is a string
+
+#Split words by all non-alpha characters
+words_h2 = re.compile(r'[^A-Z^a-z]+').split(h2_str)
+#words_h2 is a list
+
+
+#eliminating smart quotes from the words_h2
+
+clean_h2 = []
+
+for x in words_h2:
+    if "quo" not in x:
+        clean_h2.append(x) 
+
+f = open("heading2.csv", "w")
+f.write("\n".join(clean_h2))
+f.close()
+ 
+#for h3
+
+hd3 = soup.findAll('h3')
+for item in hd3:
+ 	hname3 = item.contents[0]
+ #	print(hname3)
+ 	entry = "%s" % (hname3)
+ 	value3.append(entry)
+
+
+#value3 is a list
+
+h3_str = ' '.join(value3)
+
+#h3_str is a string
+
+#Split words by all non-alpha characters
+words_h3 = re.compile(r'[^A-Z^a-z]+').split(h3_str)
+#words_h2 is a list
+
+
+#eliminating smart quotes from words_h3
+
+clean_h3 = []
+
+for x in words_h3:
+    if "quo" not in x:
+        clean_h3.append(x) 
+
+f = open("heading3.csv", "w")
+f.write("\n".join(clean_h3))
+f.close()
+
+
+
+#for h4
+
+hd4 = soup.findAll('h4')
+for item in hd4:
+ 	hname4 = item.contents[0]
+# 	print(hname4)
+ 	entry = "%s" % (hname4)
+ 	value4.append(entry)
+ 
+
+#value4 is a list
+
+h4_str = ' '.join(value4)
+
+#h4_str is a string
+
+#Split words by all non-alpha characters
+words_h4 = re.compile(r'[^A-Z^a-z]+').split(h4_str)
+#words_h4 is a list
+
+
+
+
+#eliminating smart quotes from words_h4
+
+clean_h4 = []
+
+for x in words_h4:
+    if "quo" not in x:
+        clean_h4.append(x) 
+
+f = open("heading4.csv", "w")
+f.write("\n".join(clean_h4))
+f.close()
+
+#for h5
+
+hd5 = soup.findAll('h5')
+for item in hd5:
+ 	hname5 = item.contents[0]
+# 	print(hname5)
+ 	entry = "%s" % (hname5)
+ 	value5.append(entry)
+
+
+
+#value2 is a list
+
+h5_str = ' '.join(value5)
+
+#h2_str is a string
+
+#Split words by all non-alpha characters
+words_h5 = re.compile(r'[^A-Z^a-z]+').split(h5_str)
+#words_h2 is a list
+
+
+#eliminating smart quotes from h5
+
+clean_h5 = []
+
+for x in words_h5:
+    if "&" not in x:
+        clean_h5.append(x) 
+
+f = open("heading5.csv", "w")
+f.write("\n".join(clean_h5))
+f.close()
+
+#for h6
+hd6 = soup.findAll('h6')
+for item in hd6:
+ 	hname6 = item.contents[0]
+ #	print(hname6)
+ 	entry = "%s" % (hname6)
+ 	value6.append(entry)
+
+
+#value6 is a list
+
+h6_str = ' '.join(value6)
+
+#h2_str is a string
+
+#Split words by all non-alpha characters
+words_h6 = re.compile(r'[^A-Z^a-z]+').split(h6_str)
+#words_h2 is a list
+
+
+
+#eliminating smart quotes from h5
+
+clean_h6 = []
+
+for x in words_h6:
+    if "&" not in x:
+        clean_h6.append(x) 
+
+f = open("heading6.csv", "w")
+f.write("\n".join(clean_h6))
+f.close()
+
+
+
+#extracting urls and their names
+
+name_list = []
+
+link_list = []
+
+link_list.append(url)   #putting the main url of the page in this list first
+
+for item in soup.findAll('a'):
+
+	if item.has_key("href"):
+	
+		name = item.text
+		
+		name_list.append(name)		
+				
+		href = item["href"]
+		
+		link_list.append(href)
+		
+#convert list to a string
+		
+namestr = " ".join(name_list)	
+
+
+#Split words by all non-alpha characters
+words_uname = re.compile(r'[^A-Z^a-z]+').split(namestr)
+#words_raw is a list
+
+
+#eliminating smart quotes from urlnames
+
+clean_uname = []
+
+for x in words_uname:
+    if "quo" not in x:
+        clean_uname.append(x) 
+
+
+#print clean_uname
+
+#namestr = " ".join(name_list)
+
+
+#print(namestr)
+
+#ntoken = nltk.word_tokenize(namestr)
+
+
+#consists of all the urlnames
+ 
+f= open("urlname.csv", "w")
+
+
+f.write("\n".join(clean_uname))
+	
+f.close()
+
+
+#consists of all the links
+
+f= open("link.csv", "w")
+
+
+f.write("\n".join(link_list))
+
+f.close()
+
+
+
+
+#urlname processing
+
+from nltk.corpus import stopwords
+
+from nltk.chunk import ne_chunk   #for extracting named entities
+
+from nltk.tokenize import *
+
+import re
+
+#eliminating all the punctuation marks
+
+punctuation = re.compile(r'[-.?,":;()`~!@#$%^*()_=+{}]')
+
+urlword = [punctuation.sub("", word) for word in ntoken]
+
+print(urlword)
+
+
+#extracting capitalized words
+
+capword = RegexpTokenizer('[A-Z]\w+')
+
+caps = capword.tokenize(namestr)
+
+print(caps)
+
+#putting them in a file
+
+f= open("urlcaps.csv", "w")
+
+f.write("\n".join(caps))
+
+f.close()
+
+#adding the tagger
+
+import nltk
+
+from nltk.corpus import treebank
+
+from nltk.tag import DefaultTagger
+
+from nltk.tag.sequential import ClassifierBasedPOSTagger
+
+
+default = DefaultTagger('NN')
+
+train_sents = treebank.tagged_sents()[:3000]
+
+test_sents = treebank.tagged_sents()[3000:]
+
+tagger = ClassifierBasedPOSTagger(train=train_sents,backoff=default, cutoff_prob = 0.3 )
+
+
+#tagger.evaluate(test_sents)
+
+ntag = tagger.tag(ntoken)
+
+print(ntag)
+
+
+#extracting all the noun phrases from URL string
+
+nlist = []
+
+for word,tag in ntag:
+	if (tag == 'NN'):
+	
+		value = "%s" % word
+		nlist.append(value)
+	
+	if (tag == 'NNP'):
+	
+		value = "%s" % word
+		nlist.append(value)
+		
+
+	if (tag == 'NNS'):
+	
+		value = "%s" % word
+		nlist.append(value)
+
+
+print(nlist)
+
+
+#named entities
+
+#nen = ne_chunk(ntag)
+
+#print(nen)
+
+#putting all the noun phrases in a file
+
+f = open("noun_all.csv", "w") #contains nouns from the url names
+     
+f.write("\n".join(nlist))    
+
+f.close()
+
+
+keys = sorted(set(nlist + caps))
+
+#putting all the candidate keywords in a file
+
+f= open("keys_all.csv", "w")   #consists of keywords from url names
+
+f.write("\n".join(keys))
+
+f.close()
+
+#eliminating urlnames from rawtext 
+
+f = open("raw.csv")
+
+raw = f.read()  #raw text from the prev step in extraction i.e h1
+
+rtoken = nltk.word_tokenize(raw)
+
+#removing all the punctuation  marks
+
+punctuation = re.compile(r'[-.?,":;()`~!@#$%^*()_=+{}]')
+
+rword = [punctuation.sub("", word) for word in rtoken]
+
+
+#removing all the capitalized url name words from the raw tokens
+
+rawtok = sorted(set(rword) - set(caps))
+
+
+#updating the raw text file
+
+f= open("rawtoken.csv", "w")   #this will be used for further processing
+
+f.write("\n".join(rawtok))
+
+f.close()
+
+
+#forming a set of the url names
+
+
+#lowercase all the words
+
+lurl = [w.lower() for w in urlword]
+
+print(lurl)           #all lowercase words
+
+
+#remove all repetitions
+
+uvocab = sorted(set(lurl))
+
+print(uvocab)
+
+#removing stopwords
+
+ufilter = uvocab[:]
+
+for word in ufilter:
+	if word in stopwords.words('english'):
+		ufilter.remove(word)		
+
+print(ufilter)
+
+#eliminating url name set from raw set
+
+
+#lowercase all the raw words
+
+lraw = [w.lower() for w in rword]
+
+print(lraw)           #all lowercase words
+
+#Eliminating duplicates 
+
+rvocab = sorted(set(lraw))
+
+
+#removing stopwords
+
+filter_list = rvocab[:]
+
+for word in filter_list:
+	if word in stopwords.words('english'):
+		filter_list.remove(word)		
+
+
+
+rfilter = sorted(set(filter_list) - set(ufilter))
+
+
+
+#filter file eliminating the url names
+
+f= open("rfilter.csv", "w")   #this will be used for futher processing
+
+f.write("\n".join(rfilter))
+
+f.close()
+
+
+
+
+
+
+
+
+ 
+
+
+
+

@@ -1,0 +1,15 @@
+0: tfidf
+1:title
+2: h1
+3:h2
+4:h3
+5:h4
+6:h5
+7:h6
+8: urlname
+9: hypertext
+10: ne
+11: noun
+12: caps
+13: sum
+

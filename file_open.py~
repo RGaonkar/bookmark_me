@@ -1,0 +1,6 @@
+f = open('/media/34227B6E227B3448/projectBooKmarks/rawtext/new_cont/raw.txt')
+
+rdata = f.read()
+
+print(rdata)
+
