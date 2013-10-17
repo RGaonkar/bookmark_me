@@ -12,16 +12,12 @@ from urllib import urlopen
 
 import csv 
 
-
 url = "http://hbr.org/2013/04/now-is-our-time/ar/1" 
 #keeping this along with other urls
 
-
 #proxies = {'http': 'http://f2010193:bp1708@10.1.9.23:8080'} 
 
-
 raw = urlopen(url).read()
-
 
 cleanraw = nltk.clean_html(raw)
 
